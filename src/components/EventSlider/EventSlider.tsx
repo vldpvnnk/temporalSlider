@@ -1,31 +1,54 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import './EventSlider.scss';
-import { Event } from '../TimeSlider/types';
-import React from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "./EventSlider.scss";
+import { HistoricalEvent } from "../TimeSlider/types";
+import React, { useRef, useEffect, useState } from "react";
+import RightArrow from "./icons/RightArrow";
+import LeftArrow from "./icons/LeftArrow";
 
 interface EventSliderProps {
-  events: Event[];
+  events: HistoricalEvent[];
 }
 
 const EventSlider = ({ events }: EventSliderProps) => {
+  const sortedEvents = [...events].sort((a, b) => a.year - b.year);
+
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
+
   return (
     <div className="event-slider-container">
+      <button className="custom-nav prev" ref={prevRef}>
+        <LeftArrow />
+      </button>
+      <button className="custom-nav next" ref={nextRef}>
+        <RightArrow />
+      </button>
+
       <Swiper
-        modules={[Pagination, Navigation]}
-        pagination={{ clickable: true }}
-        navigation
-        spaceBetween={50}
-        slidesPerView={1}
+        modules={[Navigation]}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        onBeforeInit={(swiper) => {
+          const navigation = swiper.params.navigation;
+
+          if (navigation && typeof navigation !== 'boolean') {
+            navigation.prevEl = prevRef.current;
+            navigation.nextEl = nextRef.current;
+          }
+        }}
+        spaceBetween={80}
+        slidesPerView={"auto"}
       >
-        {events.map((event) => (
+        {sortedEvents.map((event) => (
           <SwiperSlide key={event.id}>
             <div className="event-card">
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
+              <p className="year">{event.year}</p>
+              <p className="description">{event.description}</p>
             </div>
           </SwiperSlide>
         ))}

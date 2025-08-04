@@ -4,8 +4,7 @@ import TimeSlider from './TimeSlider/TimeSlider';
 
 const App = () => {
   return (
-    <div className="app">
-      <h1>Time Slider App</h1>
+    <div>
       <TimeSlider />
     </div>
   );
