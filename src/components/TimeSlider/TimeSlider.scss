@@ -1,0 +1,40 @@
+@use "../../styles/variables" as *;
+
+.time-slider {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .time-segments {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .segment {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 5px 10px;
+      position: relative;
+      color: $text-color;
+
+      &.active {
+        font-weight: bold;
+        color: $primary-color;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 8px;
+          height: 8px;
+          background: $primary-color;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
