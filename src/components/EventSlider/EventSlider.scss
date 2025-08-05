@@ -3,9 +3,10 @@
 .event-slider-container {
   width: 1200px;
   position: relative;
-  background-color:$main-background-color;
+  background-color:$background-color;
+  padding-left: 80px;
   .swiper {
-    padding: 10px 0;
+    padding: 0;
   }
 
   .swiper-slide {
@@ -15,7 +16,6 @@
 
 .event-card {
   border-radius: 8px;
-  color: $text-color;
   height: 100%;
 
   max-width: 400px;
@@ -25,7 +25,7 @@
     padding: 0;
   }
   .description {
-    color: $description-text-color;
+    color: $text-color;
     line-height: 1.5;
 
     display: -webkit-box;
@@ -46,7 +46,7 @@
   }
 
   .description {
-    color: $description-text-color;
+    color: $text-color;
     font-family: "PT Sans", sans-serif;
     font-size: 20px;
   }
@@ -74,11 +74,11 @@
   margin: 0;
 
   &.prev {
-    left: -60px;
+    left: 20px;
   }
 
   &.next {
-    right: -100px;
+    right: -120px;
   }
 
   &.swiper-button-disabled {

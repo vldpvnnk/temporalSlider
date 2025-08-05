@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./EventSlider.scss";
 import { HistoricalEvent } from "../TimeSlider/types";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import RightArrow from "./icons/RightArrow";
 import LeftArrow from "./icons/LeftArrow";
 

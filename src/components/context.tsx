@@ -5,6 +5,7 @@ export const timeSegments: TimeSegment[] = [
     id: 1,
     startYear: 1990,
     endYear: 1994,
+    category: "История",  
     events: [
       { 
         id: 1, 
@@ -42,6 +43,7 @@ export const timeSegments: TimeSegment[] = [
     id: 2,
     startYear: 1995,
     endYear: 1999,
+    category: "История",  
     events: [
       { 
         id: 6, 
@@ -79,6 +81,7 @@ export const timeSegments: TimeSegment[] = [
     id: 3,
     startYear: 2000,
     endYear: 2004,
+    category: "История",  
     events: [
       { 
         id: 11, 
@@ -116,6 +119,7 @@ export const timeSegments: TimeSegment[] = [
     id: 4,
     startYear: 2005,
     endYear: 2009,    
+    category: "История",  
     events: [
       { 
         id: 16, 
@@ -152,7 +156,8 @@ export const timeSegments: TimeSegment[] = [
   {
     id: 5,
     startYear: 2010,
-    endYear: 2014,   
+    endYear: 2014,
+    category: "История",  
     events: [
       { 
         id: 21, 
@@ -189,7 +194,8 @@ export const timeSegments: TimeSegment[] = [
   {
     id: 6,
     startYear: 2015,
-    endYear: 2020,   
+    endYear: 2020,
+    category: "История",   
     events: [
       { 
         id: 26, 

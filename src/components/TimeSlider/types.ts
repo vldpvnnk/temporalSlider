@@ -10,4 +10,5 @@ export interface TimeSegment {
   startYear: number;
   endYear: number; 
   events: HistoricalEvent[]; 
+  category: string;
 }
