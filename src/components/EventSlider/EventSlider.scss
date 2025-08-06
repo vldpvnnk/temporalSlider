@@ -14,30 +14,30 @@
     height: 135px;
   }
 
-.event-card {
-  border-radius: 8px;
-  height: 100%;
+  .event-card {
+    border-radius: 8px;
+    height: 100%;
 
-  max-width: 400px;
-  width: fit-content;
-  p {
-    margin: 0;
-    padding: 0;
+    max-width: 400px;
+    width: fit-content;
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    .description {
+      color: $text-color;
+      line-height: 1.5;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      white-space: normal;
+      word-break: break-word;
+      margin-top: 15px;
+    }
   }
-  .description {
-    color: $text-color;
-    line-height: 1.5;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-
-    white-space: normal;
-    word-break: break-word;
-    margin-top: 15px;
-  }
-}
 
   .year {
     font-family: "Bebas Neue", sans-serif;

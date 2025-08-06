@@ -58,10 +58,14 @@ const TimeSlider = () => {
       },
     });
   }, [activeIndex, angleStep, initialBaseAngleDeg]);
-
+  const startYear =timeSegments[activeIndex]?.startYear;
+  const endYear = timeSegments[activeIndex]?.endYear;
   return (
     <>
     <div className="time-slider-wrapper">
+      <div className="axis-y"></div>
+      <div className="horizontal-line"></div>
+      <div className="border-wrapper"/>
       <div className="time-slider">
         <div className="grid-overlay">
           <div className="horizontal-line"></div>
@@ -85,7 +89,13 @@ const TimeSlider = () => {
             </div>
           </div>
           <div className="time-circle" ref={circleRef}>
+            
             <div className="circle-line" />
+              <div className="circle-years">
+                <span className="year-left">{startYear}</span>
+                <span className="year-right">{endYear}</span>
+              </div>
+
               {timeSegments.map((segment, i) => {
                 const isHovered = hoveredIndex === i;
 

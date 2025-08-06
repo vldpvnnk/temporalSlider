@@ -53,14 +53,29 @@ const Segment = ({
             ref={circleRef}
             className="circle-outline"
         />
-{(isActive || isHovered) && (
-  <div className="popup-wrapper">
-    <div className="popup-id">{segment.id}</div>
-    {clickedIndex === index && (
-      <div className="category-label">{segment.category}</div>
-    )}
-  </div>
-)}
+        {(isActive || isHovered) && (
+        <div 
+            className="popup-wrapper" 
+            style={{ 
+                paddingLeft: clickedIndex === index ? "40px" : "0px" 
+            }}
+        >
+            <div 
+                style={{ 
+                    position: 'relative', 
+                    display: 'flex', 
+                    alignItems: 'center'
+                }}
+            >
+            <div className="popup-id" > {segment.id}</div>
+            {clickedIndex === index && (
+                <div className="category-label" style={{marginLeft: '20px'}}>
+                    {segment.category}
+                </div>
+            )}
+            </div>
+        </div>
+        )}
         </button>
     )
 }
