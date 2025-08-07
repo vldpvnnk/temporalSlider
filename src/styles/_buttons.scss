@@ -37,3 +37,10 @@
     }
   }
   
+
+.mobile-nav-wrapper {
+display: none; 
+  position: relative;
+  z-index: 10;
+    pointer-events: auto;
+}

@@ -1,5 +1,4 @@
 @use "../../styles/variables.scss" as *;
-
 .event-slider-container {
   width: 1200px;
   position: relative;
@@ -82,7 +81,7 @@
   }
 
   &.swiper-button-disabled {
-    display: none !important;
+    display: none;
   }
 }
 

@@ -1,27 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
-import { timeSegments } from "../context";
 import EventSlider from "../EventSlider/EventSlider";
 import "./TimeSlider.scss";
 import gsap from "gsap";
 import Segment from "./Segment";
 import NavigationButtons from "./NavigationButtons";
+import { TimeSegment } from "../../types";
 
-const TimeSlider = () => {
+interface TimeSliderProps {
+  segments: TimeSegment[];
+  id?: string;
+}
+
+const TimeSlider: React.FC<TimeSliderProps> = ({ 
+  segments = [], 
+  id = "time-slider" 
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [tick, setTick] = useState(0);
-  const activeSegment = timeSegments[activeIndex];
-  const count = timeSegments.length;
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const count = segments.length;
   const angleStep = 360 / count;
   const initialBaseAngleDeg = -90 + angleStep / 2;
-
   const baseAngleRef = useRef({ current: initialBaseAngleDeg });
+  const circleRef = useRef<HTMLDivElement>(null);
 
   const centerX = 268;
   const centerY = 268;
-
   const radiusX = 265; 
   const radiusY = 268;
-  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+
+  const activeSegment = segments[activeIndex];
+  const startYear =segments[activeIndex]?.startYear;
+  const endYear = segments[activeIndex]?.endYear;
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % count);
@@ -32,9 +44,6 @@ const TimeSlider = () => {
     setActiveIndex((prev) => (prev - 1 + count) % count);
     setClickedIndex(null);
   };
-
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const circleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (circleRef.current) {
@@ -58,36 +67,38 @@ const TimeSlider = () => {
       },
     });
   }, [activeIndex, angleStep, initialBaseAngleDeg]);
-  const startYear =timeSegments[activeIndex]?.startYear;
-  const endYear = timeSegments[activeIndex]?.endYear;
+
+  if (segments.length === 0) {
+    return <div>No segments provided</div>;
+  }
+
   return (
-    <>
     <div className="time-slider-wrapper">
       <div className="axis-y"></div>
       <div className="horizontal-line"></div>
       <div className="border-wrapper"/>
       <div className="time-slider">
-        <div className="grid-overlay">
-          <div className="horizontal-line"></div>
-          <div className="vertical-line"></div>
-        </div>        
         <div className="time-slider-row">
           <div className="date-with-buttons-wrapper">
             <div className="historical-date-title">
               <p>Исторические даты</p>
             </div>
+          </div>
             <div className="segment-with-buttons-wrapper">
               <p className="segment-on-buttons-title">
-                {activeIndex + 1} / {count}
+                0{activeIndex + 1}/0{count}
               </p>
               <NavigationButtons 
                 activeIndex={activeIndex} 
-                length={timeSegments.length}
+                length={segments.length}
                 onNext={handleNext}
                 onPrev={handlePrev}
+                onDotClick={(i) => {
+                  setActiveIndex(i);
+                  setClickedIndex(null);
+                }}
               />
             </div>
-          </div>
           <div className="time-circle" ref={circleRef}>
             
             <div className="circle-line" />
@@ -96,7 +107,7 @@ const TimeSlider = () => {
                 <span className="year-right">{endYear}</span>
               </div>
 
-              {timeSegments.map((segment, i) => {
+              {segments.map((segment, i) => {
                 const isHovered = hoveredIndex === i;
 
                 const angleDeg = baseAngleRef.current.current + i * angleStep;
@@ -132,6 +143,7 @@ const TimeSlider = () => {
                     setClickedIndex={setClickedIndex}
                     x={x}
                     y={y}
+                    sliderId={id}
                   />
                 );
               })}
@@ -141,8 +153,6 @@ const TimeSlider = () => {
         <EventSlider events={activeSegment.events} />
       </div>
     </div>
-    </>
-
   );
 };
 

@@ -1,6 +1,6 @@
 export interface HistoricalEvent {
   id: number;
-  year: number; 
+  year: number;
   title: string;
   description: string;
 }
@@ -8,7 +8,7 @@ export interface HistoricalEvent {
 export interface TimeSegment {
   id: number;
   startYear: number;
-  endYear: number; 
-  events: HistoricalEvent[]; 
+  endYear: number;
   category: string;
+  events: HistoricalEvent[];
 }

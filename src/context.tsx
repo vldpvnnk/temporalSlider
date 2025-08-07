@@ -1,4 +1,4 @@
-import { TimeSegment } from "./TimeSlider/types";
+import { TimeSegment } from "./types";
 
 export const timeSegments: TimeSegment[] = [
   {

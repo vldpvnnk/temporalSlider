@@ -32,8 +32,9 @@
   }
   
   .segment-with-buttons-wrapper {
+    position: absolute;
+    left: 400px;
     display: flex;
     flex-direction: column;
     height: 88px;
-    padding-left: 80px;
   }

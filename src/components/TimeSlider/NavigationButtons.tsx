@@ -7,6 +7,7 @@ interface NavigationButtonsProps {
   length: number;
   onNext: () => void;
   onPrev: () => void;
+  onDotClick: (index: number) => void;
 }
 
 const NavigationButtons: React.FC<NavigationButtonsProps> = ({
@@ -14,12 +15,14 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   length,
   onNext,
   onPrev,
+  onDotClick
 }) => {
   const opacityLeftArrow = activeIndex !== 0 ? 1 : 0.5;
   const opacityRightArrow = activeIndex !== length - 1 ? 1 : 0.5;
 
   return (
-    <div className="buttons-wrapper">
+    <>
+        <div className="buttons-wrapper">
       <button
         className="prev"
         onClick={onPrev}
@@ -43,6 +46,39 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
         <RightArrow />
       </button>
     </div>
+    <div className="mobile-nav-wrapper">
+        <div className="arrows-block">
+          <button
+            className="nav-arrow"
+            onClick={onPrev}
+            disabled={activeIndex === 0}
+            aria-label="Предыдущий"
+          >
+            <LeftArrow />
+          </button>
+          <button
+            className="nav-arrow"
+            onClick={onNext}
+            disabled={activeIndex === length - 1}
+            aria-label="Следующий"
+          >
+            <RightArrow />
+          </button>
+        </div>
+        <div className="dots-block">
+          {Array.from({ length }).map((_, index) => (
+            <button
+              key={index}
+              className={`dot ${index === activeIndex ? "active" : ""}`}
+              onClick={() => onDotClick(index)}
+              aria-label={`Go to segment ${index + 1}`}
+              aria-current={index === activeIndex ? "true" : "false"}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+
   );
 };
 

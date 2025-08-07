@@ -1,8 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.tsx',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
@@ -24,23 +28,42 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
-    {
-      test: /\.(scss|css)$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        {
-          loader: 'sass-loader',
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              quietDeps: true,
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
             },
-            sourceMap: true,
           },
-        },
-      ],
-    },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  autoprefixer({
+                    overrideBrowserslist: ['>1%', 'last 4 versions', 'not dead'],
+                  }),
+                ],
+              },
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sourceMap: true,
+              sassOptions: {
+                quietDeps: true,
+              },
+            },
+          },
+        ],
+      },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
@@ -55,6 +78,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),    
   ],
   devServer: {
     static: {
