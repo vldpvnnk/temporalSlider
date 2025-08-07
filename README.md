@@ -27,7 +27,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/vldpvnnk/temporal-slider.git
+git clone https://github.com/vldpvnnk/temporalSlider.git
 cd temporal-slider
 ```
 2. Установите зависимости:
